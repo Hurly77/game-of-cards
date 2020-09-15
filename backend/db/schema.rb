@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 2020_09_15_050016) do
 
   create_table "cards", force: :cascade do |t|
     t.string "rank"
+    t.string "card_type"
     t.string "color"
     t.integer "value"
     t.string "img"

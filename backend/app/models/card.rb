@@ -1,10 +1,8 @@
 class Card < ApplicationRecord
   belongs_to :deck
-  validate :limit_num_of_cards, :on => :create
-
-  def limit_num_of_cards
-    if self.deck.cards(:reload).count == 52
-      errors.add(:base, "Exceeded card limit per deck")
+  validate :on => :create do 
+    if self.deck && self.deck.cards.length >= 52
+      errors.add("deck already has 52 cards")
     end
   end
 end

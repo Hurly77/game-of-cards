@@ -2,6 +2,7 @@ class CreateCards < ActiveRecord::Migration[6.0]
   def change
     create_table :cards do |t|
       t.string :rank
+      t.string :card_type
       t.string :color
       t.integer :value
       t.string :img
