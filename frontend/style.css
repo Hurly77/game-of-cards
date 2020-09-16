@@ -1,23 +1,103 @@
+body, html { min-height: 100%; }
+
 body {
-  background-color: rgb(33, 35, 38);
+  background: url(https://picfiles.alphacoders.com/163/thumb-1920-163749.jpg) center no-repeat;
+  background-size: cover;
+  background-color: #444;
+}
+.top{
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 8px;
+  height: 50px;
+  width: 1000px;
+  border-style: solid;
+  border-width: 11px;
+  border-radius: 5px;
+  border-color: rgb(170, 23, 23);
+  border-image: url(https://i.pinimg.com/originals/9b/71/ed/9b71ed43132660b913889aadfd70638b.png) 10 round;
+  background: url(https://picfiles.alphacoders.com/163/thumb-1920-163749.jpg) center no-repeat;
+  background-size: cover;
+  background-color: #444;
 }
 .hand {
-  margin: auto;
-  height: 800px;
-  width: 99%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 8px;
   border-style: solid;
-  border-width: 8px;
-  border-color: black;
-  background-color: rgba(25, 105, 17, 0.883);
+  width: 1000px;
+  height: 800px;
+  border-width: 12px;
+  border-radius: 10px;
+  border-color: rgba(175, 14, 14, 0.87);
+  border-image: url(https://i.pinimg.com/originals/9b/71/ed/9b71ed43132660b913889aadfd70638b.png) 10 round;
+  background-color: rgba(0, 0, 0, 0.924);
 }
 
-body > canvas > div.play-cards {
+.stack {
+  width: 999;
+  height: 500px;
+}
+
+.play-cards {
+  display: block;
+  width: 1000px;
+  height: 290px;
+  background: url(https://jooinn.com/images/red-velvet.jpg) center no-repeat;
+  background-size: cover;
+  background-blend-mode: overlay;
+  border-top-style: solid;
+  border-width: 11px;
+  border-radius: 5px;
+  border-image: url(https://i.pinimg.com/originals/9b/71/ed/9b71ed43132660b913889aadfd70638b.png) 11 round;
+  background-color: rgb(31, 2, 7);
+  border-top-color: blueviolet;
+}
+.options {
+  width: 999px;
+  height: 75px;
+}
+
+button:hover {
+  margin: 10px;
+  width: 75px;
+  height: 50px;
+  font-size: 16px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  background: url(https://images.immediate.co.uk/production/volatile/sites/3/2017/10/ST2_Vertical-Main_PRE_US-57ae581.jpg?quality=90&resize=620%2C413) center no-repeat;
+  background-size: cover;
+  background-color: #444;
+  border-radius: 15px;
+  box-shadow: 0 2px rgba(255, 255, 255, 0.561);
+}
+
+button {
+  margin-top: 10px;
+  margin-left: 10px;
+  padding: 13px;
+  color: rgb(167, 161, 255);
+  background: url(https://pyxis.nymag.com/v1/imgs/b30/0ba/3fb9f492524bb6d3fb73f16018224c1a66-07-stranger-things-vfx-1.2x.w710.jpg) center no-repeat;
+  background-size: cover;
+  background-color: #444;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 0.5px rgba(0, 0, 0, 0.561);
+}
+
+.cards {
   display: flex;
-  width: 200px;
-  height: 160px;
-  border-width: 1px;
-  border-color: black;
 }
 .card {
-  background-color: cornsilk;
+  margin-left: 10px;
+  width: 133px;
+  height: 200px;
+  background: url(https://westridgefinehomes.com/wp-content/uploads/2017/05/002-texture-background-high-resolution-subtle-card-board-collection-board-pack.jpg) center no-repeat;
+  background-size: cover;
+  background-blend-mode: overlay;
+  background-color: rgb(0, 49, 70);
+  border-style: solid;
+  border-radius: 10%;
+  border-width: 1px;
+  border-color: rgb(187, 43, 43);
 }
