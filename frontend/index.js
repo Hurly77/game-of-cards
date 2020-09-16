@@ -37,15 +37,19 @@ class House {
 }
 function shuffle(array){
   let a1 = array,
-      a2 = a1.splice(0, Math.ceil(array.length / 2)),
-      shuffle = []
-  
-  for(i = array.length; i < array.length; i++){
-   shuffle += shuffle.concat.apply([], a1.map((i, ind) => [i, a2[ind]]))
-  }
-  return shuffle
-}
-function shuffle(h1, h2){
+      a2 = a1.splice(0, Math.ceil(array.length / 2))
+
+ let shuffled = (h1, h2) => {
   return [].concat.apply([], h1.map((i, ind) => [i, h2[ind]] ))  
 }
+return shuffled(a1, a2)
+}
 let array2 = array.splice(0, Math.ceil(array.length / 2));
+
+let riffle = function(deck){
+  let i = 0,
+      
+  for(i = 0; i < deck.length / 2; i++){
+    
+  }
+}
