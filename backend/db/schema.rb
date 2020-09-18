@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_15_050016) do
+ActiveRecord::Schema.define(version: 2020_09_18_033541) do
 
   create_table "cards", force: :cascade do |t|
     t.string "rank"
@@ -30,12 +30,10 @@ ActiveRecord::Schema.define(version: 2020_09_15_050016) do
   end
 
   create_table "players", force: :cascade do |t|
-    t.integer "money"
-    t.integer "bet"
     t.string "name"
-    t.string "win_to_loses"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.integer "money", default: 10
+    t.integer "bet"
+    t.integer "ratio"
   end
 
   create_table "table_games", force: :cascade do |t|

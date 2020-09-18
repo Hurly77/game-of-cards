@@ -1,3 +1,15 @@
+class player {
+	constructor(name, money, ratio) {
+		this.name = name;
+		this.money = money;
+		this.ratio = ratio;
+	}
+}
+
+let createPlayer = () => {
+
+}
+
 let deckOfCards = async () => {
 	const deck = await fetch('http://localhost:3000/decks/1');
 	const deck_1 = await deck.json();
@@ -22,12 +34,19 @@ let riffle = function(deck) {
 	}
 	return tmp;
 };
-class player {
-	constructor(name, money, ratio) {
-		this.name = name;
-		this.money = money;
-		this.ratio = ratio;
-	}
-}
 
-class Deal {}
+let test = () => {
+
+}
+// //recusive factorial 
+// let fc = (n) => {
+// 	return (n != 1) ? n * fc(n - 1) : 1;
+// }
+
+// let nCr = (n, r) => {
+// 	return fc(n)/fc(n - r)/fc(r)
+// }
+
+let test2 = () => {
+	curent = []
+}

@@ -64,3 +64,54 @@ Card.create(rank: "hearts", card_type: "Queen", color: "red", value: 10, img: ""
 Card.create(rank: "hearts", card_type: "Ace", color: "red", value: 11, img: "", deck_id: 1)
 Table.create()
 Deck.create(table_id: 1) 
+Player.create(name: "cameron", ratio:0)
+
+#Just a reverence to what attributes my models have.
+
+# create_table "cards", force: :cascade do |t|
+#   t.string "rank"
+#   t.string "card_type"
+#   t.string "color"
+#   t.integer "value"
+#   t.string "img"
+#   t.integer "deck_id"
+#   t.datetime "created_at", precision: 6, null: false
+#   t.datetime "updated_at", precision: 6, null: false
+# end
+
+# create_table "decks", force: :cascade do |t|
+#   t.integer "table_id"
+#   t.datetime "created_at", precision: 6, null: false
+#   t.datetime "updated_at", precision: 6, null: false
+# end
+
+# create_table "players", force: :cascade do |t|
+#   t.integer "money"
+#   t.integer "bet"
+#   t.string "name"
+#   t.string "win_to_loses"
+#   t.datetime "created_at", precision: 6, null: false
+#   t.datetime "updated_at", precision: 6, null: false
+# end
+
+# create_table "table_games", force: :cascade do |t|
+#   t.string "name"
+#   t.string "rules"
+#   t.integer "games_played"
+#   t.integer "table_id"
+#   t.datetime "created_at", precision: 6, null: false
+#   t.datetime "updated_at", precision: 6, null: false
+# end
+
+# create_table "table_players", force: :cascade do |t|
+#   t.integer "table_id"
+#   t.integer "player_id"
+#   t.integer "table_game_id"
+#   t.datetime "created_at", precision: 6, null: false
+#   t.datetime "updated_at", precision: 6, null: false
+# end
+
+# create_table "tables", force: :cascade do |t|
+#   t.datetime "created_at", precision: 6, null: false
+#   t.datetime "updated_at", precision: 6, null: false
+# end
