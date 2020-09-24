@@ -30,10 +30,10 @@ ActiveRecord::Schema.define(version: 2020_09_18_033541) do
   end
 
   create_table "players", force: :cascade do |t|
-    t.string "name"
+    t.string "name", default: "player1"
     t.integer "money", default: 10
-    t.integer "bet"
-    t.integer "ratio"
+    t.integer "bet", default: 5
+    t.integer "ratio", default: 0
   end
 
   create_table "table_games", force: :cascade do |t|
