@@ -163,7 +163,6 @@ const table = () => {
 		let rgb = () =>Math.floor(Math.random()* 255) 
 		let y = Math.floor(Math.random()* 70 +20)
 		let fill = `rgb(${rgb()}, ${rgb()}, ${rgb()})`
-		console.log(fill)
 		ctx.fillStyle = fill
 		ctx.fillRect(i, 3, 30, y)
 		for (let j = 3; j < y; j+=5) {

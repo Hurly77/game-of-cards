@@ -5,9 +5,9 @@ class Canvas {
 		this.canvas.height = height;
 		this.ctx = this.canvas.getContext('2d');
 	}
-	stick(){
-		let cDiv = document.querySelector('.stack')
-		cDiv.appendChild(this.canvas)
+	stick() {
+		let cDiv = document.querySelector('.stack');
+		cDiv.appendChild(this.canvas);
 	}
 }
 
@@ -25,11 +25,39 @@ class Deck {
 	}
 }
 
-class Player {
-	constructor(name, money, ratio) {
+class Game {
+	
+}
+
+class MakePlayer {
+	constructor(name, bet, money, ratio) {
+		this.url = 'http://localhost:3000/players';
 		this.name = name;
+		this.bet = bet;
 		this.money = money;
 		this.ratio = ratio;
 	}
-	getByName() {}
+	post() {
+		fetch(this.url, {
+			method  : 'POST',
+			headers : {
+				'Content-Type' : 'application/json',
+				Accept       : 'application/json'
+			},
+			body  	 : JSON.stringify({
+				name  : this.name,
+				bet   : this.bet,
+				money : this.name,
+				ratio : this.ratio
+			})
+		})
+			.then(function(response){
+				return response.json();
+			})
+			.then(function(object){
+				console.log(object);
+				stickTo(object);
+				addToOptions(object.name);
+			});
+	}
 }

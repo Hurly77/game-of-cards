@@ -6,6 +6,7 @@ body {
   background-color: #444;
 }
 .top{
+  display: flex;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 8px;
@@ -20,9 +21,72 @@ body {
   background-size: cover;
   background-color: #444;
 }
-.top-button{
-  
+
+.top > button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-right: 2px;
+  /* margin-bottom: ; */
+  color: rgb(32, 31, 54);
+  background-color: rgb(143, 40, 40);
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 0.5px rgba(0, 0, 0, 0.561);
 }
+.top > button:hover {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-right: 2px;
+  /* margin-bottom: ; */
+  color: rgb(32, 31, 54);
+  background-color: rgb(143, 40, 40);
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 0.5px rgba(0, 0, 0, 0.561);
+}
+
+table{
+  margin-left: 50px;
+  margin-right: 2px;
+  text-align: center;
+  color: red;
+  text-shadow: 3px 3px 5px black;
+  background-color: rgba(4, 26, 36, 0.767);
+  width: 500px;
+  height: 50px;
+  border-radius: 6px;
+}
+
+input{
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: 10px;
+  margin-right: 2px;
+  background: url(https://www.screenja.com/static/img/thumbs/stranger-things-1-normal-636.png) center no-repeat;
+  height: 30px;
+  background-position: center;
+  background-size: cover;
+}
+input:hover{
+  color: white;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: 10px;
+  margin-right: 2px;
+  background: url(https://64.media.tumblr.com/b32bae4a6663201345e4e2b2b0d0a350/tumblr_ohfmgxKHfN1tloukjo2_250.jpg) center no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+select{
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: 10px;
+  margin-right: 2px;
+}
+
 .hand {
   margin-left: auto;
   margin-right: auto;
@@ -57,6 +121,7 @@ body {
   border-top-color: blueviolet;
 }
 .options {
+  display: flex;
   width: 999px;
   height: 75px;
 }
@@ -86,20 +151,50 @@ body {
   border-radius: 15px;
   box-shadow: 0 0.5px rgba(0, 0, 0, 0.561);
 }
+.hidden{
+  display: none;
+}
+
+.hidden-hud{
+  display: none;
+}
+
+.bet {
+  margin-left: 10px;
+}
+
+.bet > input {
+  width: 40px;
+  background-image: none;
+  background-color: rgb(224, 20, 20);
+  color: black;
+}
+.bet > button {
+  margin-top: 30px;
+}
+
+.hidden-wager {
+  display: none;
+}
+
+#number{
+  margin-left: 10px;
+}
 
 .cards {
   display: flex;
 }
 .card {
+  box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
   margin-left: 10px;
   width: 133px;
   height: 200px;
-  background: url(https://westridgefinehomes.com/wp-content/uploads/2017/05/002-texture-background-high-resolution-subtle-card-board-collection-board-pack.jpg) center no-repeat;
-  background-size: cover;
-  background-blend-mode: overlay;
-  background-color: rgb(0, 49, 70);
+  background: no-repeat;
+  background-size: 133px 200px;
   border-style: solid;
   border-radius: 10%;
   border-width: 1px;
   border-color: rgb(187, 43, 43);
+ 
 }
