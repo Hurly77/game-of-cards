@@ -59,17 +59,18 @@ table{
   border-radius: 6px;
 }
 
-input{
+.top > input{
   margin-top: 8px;
   margin-bottom: 8px;
   margin-left: 10px;
   margin-right: 2px;
+  border-color: rgb(32, 31, 54);
   background: url(https://www.screenja.com/static/img/thumbs/stranger-things-1-normal-636.png) center no-repeat;
   height: 30px;
   background-position: center;
   background-size: cover;
 }
-input:hover{
+.top > input:hover{
   color: white;
   margin-top: 8px;
   margin-bottom: 8px;
@@ -81,11 +82,15 @@ input:hover{
 }
 
 select{
+  color: rgb(255,21,21);
+  border-color: rgb(58,95,229);
+  background-color: rgb(31, 2, 7);
   margin-top: 8px;
   margin-bottom: 8px;
   margin-left: 10px;
   margin-right: 2px;
 }
+
 
 .hand {
   margin-left: auto;
@@ -141,8 +146,10 @@ select{
 }
 .options > button{
   margin-top: 10px;
-  margin-left: 10px;
-  padding: 13px;
+  margin-left: 16px;
+  width: 75px;
+  height: 50px;
+  padding-left: 13px;
   color: rgb(167, 161, 255);
   background: url(https://pyxis.nymag.com/v1/imgs/b30/0ba/3fb9f492524bb6d3fb73f16018224c1a66-07-stranger-things-vfx-1.2x.w710.jpg) center no-repeat;
   background-size: cover;
@@ -163,22 +170,47 @@ select{
   margin-left: 10px;
 }
 
-.bet > input {
-  width: 40px;
-  background-image: none;
-  background-color: rgb(224, 20, 20);
-  color: black;
-}
-.bet > button {
-  margin-top: 30px;
+.wager-btn {
+  border: solid;
+  color: rgb(255,21,21);
+  border-color: rgb(58,95,229);
+  border-width: 1px;
+  border-radius: 10%;
+  margin-top: 12px;
+  margin-left: 5px;
+  background-color: rgb(30,25,60) ;
 }
 
 .hidden-wager {
   display: none;
 }
 
-#number{
+.bet-bar {
   margin-left: 10px;
+  width: 40px;
+  background-image: none;
+  border-color: rgb(58,95,229);
+  border-width: 1px;
+  background-color:rgb(30,25,60);
+  color: rgb(255,21,21);
+}
+
+.house{
+  display: flex;
+}
+
+.h-cards{
+  text-align: center;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  background-color: rgba(175, 14, 14, 0.87);
+  /* background: no-repeat; */
+  border-style: solid;
+  border-radius: 10%;
+  border-width: 1px;
+  border-color: rgb(0, 0, 0);
+  width: 70px;
+  height: 45px;
 }
 
 .cards {

@@ -15,8 +15,8 @@ class PlayersController < ApplicationController
   end
 
   def update
-    player = Player.find(id: params[:name])
-    update = Player.update(player)
-    render json: update
+    player = Player.find_by_id(params[:id])
+    player.update(params.permit(:name,:money,:bet,:ratio, :wins, :games_played))
+    render json: player
   end
 end

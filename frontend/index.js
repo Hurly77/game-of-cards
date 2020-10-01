@@ -46,13 +46,19 @@ const wash = (a) => {
 	return shuffledDeck;
 };
 ////////////////final stage pusts it all together///////////////////////
-const shuffleCards = (n) => {
+const shuffleCards = async (n) => {
 	let urls = new Deck(n),
 		allDecks = urls.numOfDeck();
-	return cardDeck(allDecks);
+	return await cardDeck(allDecks);
 };
-///////////////////////////Updates Card array/////////////////////////////////////////
-
+///////////////////////////current Player Hand/////////////////////////////////////////
+const cardValue = (array) => {
+	let initialValue = 0;
+	let sum = array.reduce(function(a, b){
+		return a + b.value;
+	}, initialValue);
+	return sum;
+};
 /////////////////////Below Is all game Functionality////////////////////////////////////////////
 const playerData = async () => {
 	const r = await fetch('http://localhost:3000/players');
@@ -93,13 +99,12 @@ let stickTo = (obj) => {
 	t1.innerText = `bet: ${obj.bet}`;
 	t2.innerText = `money: ${obj.money}`;
 	t3.innerText = `ratio: ${obj.ratio}`;
+	return obj;
 };
 
-const newPlayer = () => {
-	let value = document.querySelector('input').value;
+const newPlayer = (value) => {
 	p = new MakePlayer(value);
 	p.post();
-	return p;
 };
 
 const findPlayer = (name) => {
@@ -107,163 +112,200 @@ const findPlayer = (name) => {
 		for (const key in data) {
 			if (data[key].attributes.name == name) {
 				let player = data[key].attributes;
-				stickTo(player);
-				return player
+				player.id = parseInt(data[key].id);
+				return stickTo(player);
 			}
 		}
-	})
-}
+	});
+};
 
 ///////////////////////////////////////////////////////////////////////
 document.addEventListener('DOMContentLoaded', () => {
 	table(), ofs();
-	let player;
-	const [start, add, pick, hit, split, dd, stay, wager] = document.querySelectorAll('button')
-	const [textBox, wagerInp] = document.querySelectorAll('input')
-	hit.disabled = true
-	const list = document.querySelector('.player-select'),
-		name = document.querySelector('select');
-		hand = [],
+	const [add, hit, dd, stay, wager] = document.querySelectorAll('button'),
+		[textBox, wagerInp] = document.querySelectorAll('input');
+	wager.disabled = true;
+	wagerInp.disabled = true;
+	let cardContainer = document.querySelector('.cards'),
+		hud = document.querySelector('.hidden-hud'),
+		list = document.querySelector('.player-select'),
+		name = document.querySelector('select'),
+		deck = shuffleCards(1),
 		house = [],
-		discard = [],
-		deck = shuffleCards(1)
+		hand = [],
+		player;
 
-	document.addEventListener('click', function (e) {
-		e.preventDefault()
-		let player = findPlayer(name.value)
-		if (e.target == add) {
-			add.classList.replace('add-player', 'hidden');
-			textBox.classList.replace('not', 'hidden');
-			list.classList.replace('player-select', 'hidden');
-			start.classList.replace('hidden', 'start-game');
-			pick.classList.replace('player', 'hidden');
-			let player = newPlayer(name.value);
-			return player
-		}
-		if (e.target == pick) {
-			pick.classList.replace('player', 'hidden');
-			start.classList.replace('hidden', 'start-game');
-			add.classList.replace('add-player', 'hidden');
-			textBox.classList.replace('not', 'hidden');
-			list.classList.replace('player-select', 'hidden');
-			let player = findPlayer(name.value);
-			return player.then((obj) => { return obj })
-		}
-		if (e.target == start) {
-			hud = document.querySelector('.hidden-hud');
-			hud.classList.replace('hidden-hud', 'table');
-			start.classList.replace('start-game', 'hidden');
-		}
-		if (e.target == wager) {
-			hit.disabled = false
-			player.then((obj) => {
-				if (obj.money >= parseInt(wagerInp.value)) {
-					obj.money -= parseInt(wagerInp.value)
-					wager.classList.replace('wager-btn', 'hidden-wager');
-					wagerInp.classList.replace('bet-bar', 'hidden-wager');
-					hand.push(hitX(2, deck)) 
-					stickTo(obj)
-					return obj
-				}
-			})
-		}
-		if(e.target == hit){
-			hitX(1, deck)
-		}
-		if(e.target == split){
+	const btnIO = (io) => {
+		hit.disabled = io;
+		dd.disabled = io;
+		stay.disabled = io;
+	};
+	btnIO(true);
 
-		}
-		if(e.target == dd){
+	const hide = () => {
+		add.classList.replace('add-player', 'hidden');
+		textBox.classList.replace('not', 'hidden');
+		list.classList.replace('player-select', 'hidden');
+		hud.classList.replace('hidden-hud', 'table');
+		wager.disabled = false;
+		wagerInp.disabled = false;
+	};
 
+	const showBet = () => {
+		wager.classList.toggle('hidden-wager');
+		wagerInp.classList.toggle('hidden-wager');
+		btnIO(true);
+	};
+
+	const makeCard = async () => {
+		return await deck.then(function(deck){
+			let cc = deck.pop();
+			return new Card(cc.id, cc.value, cc.card_type, cc.img);
+		});
+	};
+
+	const hitX = async (n) => {
+		for (let i = 0; i < n; i++) {
+			const newCard = await makeCard(),
+				card = document.createElement('div');
+			card.setAttribute('class', 'card');
+			cardContainer.appendChild(card);
+			card.style.backgroundImage = `url(${newCard.img})`;
+			hand.push(newCard);
 		}
-		if(e.tartget == stay){
-			house()
+	};
+
+	const ratio = () => {
+		if(player.wins != 0){
+			let n = player.wins/player.games_played
+			console.log(n)
+			let r = Math.round(n*100)/ 100;
+			console.log(r)
+			player.ratio = r;
+		}
+	};
+
+	const win = (bool, bet) => {
+		bool == true ? (player.wins += 1) : null;
+		player.money += bet;
+		player.games_played += 1;
+		ratio();
+		update(player);
+
+		end();
+	};
+
+	const pair = () => {
+		return hand[0].cardTpye === hand[1].cardTpye && hand.length == 2 ? true : false;
+	};
+
+	const end = () => {
+		let div = document.querySelector('.cards');
+		hand.length = 0;
+		house.length = 0;
+		house;
+		while (div.firstChild) {
+			div.removeChild(div.firstChild);
+		}
+		showBet();
+	};
+
+	const update = (player) => {
+		let configObj = {
+			method  : 'PUT',
+			headers : {
+				'Content-Type' : 'application/json',
+				Accept         : 'application/json',
+			},
+			body    : JSON.stringify({
+				id           : player.id,
+				name         : player.name,
+				bet          : player.bet,
+				money        : player.money,
+				ratio        : player.ratio,
+				wins         : player.wins,
+				games_player : player.games_played,
+			}),
+		};
+		fetch(`http://localhost:3000/players/${player.id}`, configObj).then((r) => r.json()).then((data) => {
+			data;
+			stickTo(player);
+		});
+	};
+
+	let eval = async () => {
+		let bust = (n) => (n > 21 ? true : false),
+			cVal = cardValue(hand),
+			hVal = cardValue(house);
+		while (hVal < 17) {
+			let newCard = await makeCard();
+			house.push(newCard);
+			hVal = cardValue(house);
+		}
+		if (hVal < cVal && cVal <= 21) {
+			alert(`You win!! the House got ${hVal}`);
+			return win(true, player.bet * 1.5);
+		}
+		if (cVal == 21 && house.length == 2) {
+			alert('BlackJack');
+			return win(true, player.bet * 2.5);
+		}
+		if(hVal > 21 && cVal <=21){
+			alert(`You win!! the House got ${hVal}`);
+			return win(true, player.bet * 1.5);
+		}
+		if (bust(cVal)) {
+			alert(`sorry, you bust, the House got ${hVal}`);
+			win(false, -player.bet);
+		} else {
+			alert(`sorry House wins, the House got ${hVal}`);
+			win(false, -player.bet);
+		}
+	};
+
+	add.addEventListener('click', async function(){
+		if (textBox.value == '' && name.value != '') {
+			pl = name.value;
+			player = await findPlayer(pl);
+			hide();
+		}
+		if (name.value == '' && textBox.value != '') {
+			pl = textBox.value;
+			player = newPlayer(pl);
+			hide();
 		}
 	});
 
-	let hitX = (n, array) => {
-		let cardContainer = document.querySelector('.cards');
-		let tmp = []
-		for (let i = 0; i < n; i++) {
-			const card = document.createElement('div');
-			card.setAttribute('class', 'card');
-			cardContainer.appendChild(card);
-			array.then((cards) => {
-				let pullCard = cards.pop();
-				card.style.backgroundImage = `url(${pullCard.img})`;
-				tmp.push(pullCard);
-			});
+	wager.addEventListener('click', (e) => {
+		if (wagerInp.value <= player.money && wagerInp.value > 0) {
+			player.bet = +wagerInp.value;
+			showBet();
+			btnIO(false);
+			hitX(2);
 		}
-		return tmp;
-	};
+	});
 
-	let handValue = (hand) => {
-		for (let i = 0; i < hand.length; i++) {
-			hand.reduce((a, b) => {
-				return a + b;
-			}, (i = 0));
-		}
-	};
-
-	const reycle = (discard) => {
-		return shuffleCards(discard);
-	};
-
-	const House = (house) => {
-		i = 0;
-		while (handValue(house) < 17) {
-			house.push(hitX(1));
-			i++;
-		}
-		return handValue(house);
-	};
-
-	const double = (ph) => {
-		if (player.money * 2 > !player.bet) {
-			player.bet + player.bet;
-			ph.push(hitX(1));
-			stickTo(player);
-			return ph;
-		}
-		//double you original wager + extra card + stand// meaning you can't hit
-	};
-
-	let stayX = (hand, house) => {
-		if (bust(house)) {
-			blackJack(hand);
+	hit.addEventListener('click', () => {
+		if (cardValue(hand) < 21 && cardValue(hand) != 0) {
+			hitX(1);
 		} else {
-			alert('house wins');
+			eval();
 		}
-	};
+	});
 
-	const blackJack = (hand, house) => {
-		if (handValue(hand) == 21) {
-			alert('blackJack');
-			player.bet * 1.5 + player.money;
-			end();
+	dd.addEventListener('click', () => {
+		if (pair()) {
+			hitX(1);
+			if (cardValue == 21) {
+				alert('YOU WON DOUBLES.... HIP, HIP, ARRAY!!!');
+				win(true, player.bet * 4);
+			} 
+		}else {
+			eval();
 		}
-		if (house > hand) {
-			alert('house wins');
-			end();
-		}
-		//end()
-	};
+	});
 
-	const end = (player) => {
-		let configObj = {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-				Accept: 'application/json'
-			},
-			body: JSON.stringify({
-				name: player.name,
-				bet: player.bet,
-				money: player.money,
-				ratio: player.ratio
-			})
-		};
-		fetch(`http://localhost:3000/players/${player.id}`, configObj).then((r) => r.json()).then((data) => data)		//update
-	};
-
+	stay.addEventListener('click', () => {
+		eval();
+	});
 });

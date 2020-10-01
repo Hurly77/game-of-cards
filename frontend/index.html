@@ -11,14 +11,13 @@
 </head>
 <body>
   <div class="top">
-    <button class="hidden">Start Game</button>
-    <button class="add-player">Make Player</button>
+    <button class="add-player">Start</button>
     <input class="not" type="text"> 
     <form class="player-select">
       <select>
+        <option value=""></option>
       </select>
     </form>
-    <button class="player">Pick Player</button>
     <div class="hidden-hud">
       <table>
         <tr>
@@ -31,6 +30,8 @@
         </tr>
       </table>
     </div>
+    <div class="house">
+    </div>
   </div>
   <div class="hand">
     <div class="stack">
@@ -38,11 +39,10 @@
     <div class="play-cards"  >
         <div class="options">
           <button id="hit">Hit</button>
-          <button id="split">Split</button>
-          <button id="dd">Double Down</button>
+          <button id="dd">Double <br> Down</button>
           <button id="stay">Stay</button>
           <div class="bet">
-            <input type="number" class="bet-bar"><button class="wager-btn">Place Wager</button>
+            <input type="number" class="bet-bar"><button class="wager-btn">bet</button>
           </div>          
         </div>
         <div class="cards">

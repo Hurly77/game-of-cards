@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 2020_09_18_033541) do
     t.integer "money", default: 10
     t.integer "bet", default: 5
     t.integer "ratio", default: 0
+    t.integer "wins", default: 0
+    t.integer "games_played", default: 0
   end
 
   create_table "table_games", force: :cascade do |t|

@@ -63,7 +63,7 @@
 {rank: "hearts", card_type: "Ace", color: "red", value: 11, img: "https://scontent-lax3-1.xx.fbcdn.net/v/t1.0-9/120370092_368870394145086_5428704726955667558_n.jpg?_nc_cat=103&_nc_sid=730e14&_nc_ohc=SNwxya3Hmk4AX_1d22U&_nc_ht=scontent-lax3-1.xx&oh=b88abcf036a3045efda93ae0ccc2d8ee&oe=5F94BE51", deck_id: 1}]
 Table.create()
 Deck.create(table_id: 1) 
-Player.create(name: "cameron", ratio:0)
+Player.create(name: "cameron", money:1000000, ratio:0)
 
 def createDeck(n)
   Deck.create(table_id: 1) 
